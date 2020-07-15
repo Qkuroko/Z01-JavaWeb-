@@ -1,5 +1,9 @@
 package cn.edu.ahtcm.servlet;
 
+import cn.edu.ahtcm.bean.User;
+import cn.edu.ahtcm.dao.UserDao;
+import cn.edu.ahtcm.dao.UserDaoImpl;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -19,5 +23,16 @@ public class LoginServlet extends HttpServlet {
         System.out.println(name);
         System.out.println(password);
         //todo 查询数据表t_user 有没有该用户
+        UserDao dao = new UserDaoImpl();
+        User user = dao.login(name,password);
+        if(user!=null){
+            request.getSession().setAttribute("user",user);
+            //重定向到后台管理界面
+            response.sendRedirect("/admin/manage.jsp");
+        }else{
+            //请求转发
+            request.getRequestDispatcher("/error.jsp").forward(request,response);
+        }
+
     }
 }
