@@ -21,7 +21,7 @@
     <script type='text/javascript' src='/js/kindeditor/kindeditor-all-min.js' charset='utf-8'></script>
     <script>
         KindEditor.ready(function(K) {
-            var editor1 = K.create('textarea[name="content1"]', {
+            var editor1 = K.create('textarea[name="content"]', {
                 uploadJson : '/UploadImageServlet',
                 allowFileManager : true,
                 afterCreate : function() {
@@ -71,11 +71,7 @@
                 </div>
                 <div class="form-group">
                     <label for="content">内容</label>
-                    <textarea class="form-control" id="content" name="content" rows="3" required></textarea>
-                </div>
-                <div class="form-group">
-                    <label for="content1">内容</label>
-                    <textarea name="content1" id="content1" cols="100" rows="8" style="width:700px;height:200px;visibility:hidden;"></textarea>
+                    <textarea name="content" id="content" cols="100" rows="8" style="width:700px;height:200px;visibility:hidden;"></textarea>
                 </div>
                 <div class="form-group">
                     <div class="col-sm-offset-2 col-sm-10">

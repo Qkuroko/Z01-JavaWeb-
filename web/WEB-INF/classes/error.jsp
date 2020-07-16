@@ -11,6 +11,6 @@
     <title>Title</title>
 </head>
 <body>
-<h1>无法登录，用户名或密码错误</h1>
+<h1>${error}</h1>
 </body>
 </html>
