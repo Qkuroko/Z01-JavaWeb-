@@ -59,9 +59,8 @@
                         <td>${artilce.id}</td>
                         <td><a href="/ArticleDetailServlet?id=${artilce.id}">${artilce.title}</a></td>
                         <td>
-                            <a href="/ArticleDetailServlet?id=${artilce.id}">编辑</a>
+                            <a href="/ArticleEditServlet?id=${artilce.id}">编辑</a>
                             <a href="javascript:;" onclick="deleteArticle(${artilce.id})">删除</a>
-                            <button id="delete" type="button">删除</button>
                         </td>
                     </tr>
                 </c:forEach>
@@ -71,12 +70,6 @@
     </div>
 </div>
 <script type="text/javascript">
-    $(document).ready(function(){
-        $("#delete").click(function(){
-            alert("我被单击了");
-        });
-    });
-
     function deleteArticle(id){
         if(!confirm("确认要删除选中的记录吗？")) return;
         $.ajax({

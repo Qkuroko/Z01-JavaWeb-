@@ -52,4 +52,45 @@ public class ArticleDao {
         }
         return articleList;
     }
+
+    public Article getArticleById(int id){
+        String sql = "select * from t_article where id=?";
+        Connection conn = DBUtil.getConnection();
+        Article article = null;
+        try {
+            PreparedStatement ps = conn.prepareStatement(sql);
+            ps.setInt(1,id);
+            ResultSet rs = ps.executeQuery();
+            while(rs.next()){
+                article = new Article();
+                article.setId(rs.getInt("id"));
+                article.setTitle(rs.getString("title"));
+                article.setContent(rs.getString("content"));
+            }
+            DBUtil.release(rs,null,ps,conn);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return article;
+    }
+
+    public boolean deleteArticle(int id){
+        String sql = "delete from t_article where id=?";
+        Connection conn = DBUtil.getConnection();
+        int count = 0;
+        PreparedStatement ps = null;
+        try {
+            ps = conn.prepareStatement(sql);
+            ps.setInt(1,id);
+            count = ps.executeUpdate();
+            DBUtil.release(null,null,ps,conn);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        if(count==0){
+            return false;
+        }else {
+            return true;
+        }
+    }
 }
