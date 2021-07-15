@@ -93,4 +93,32 @@ public class ArticleDao {
             return true;
         }
     }
+
+    /**
+     * 更新文章
+     * @param id
+     * @param tile
+     * @param content
+     * @return
+     */
+    public boolean updateArticle(int id,String tile,String content){
+        Connection conn = DBUtil.getConnection();
+        String sql = "update t_article set title=?,content=? where id=?";
+        int count = 0;
+        try {
+            PreparedStatement ps = conn.prepareStatement(sql);
+            ps.setString(1,tile);
+            ps.setString(2,content);
+            ps.setInt(3,id);
+            count = ps.executeUpdate();
+            DBUtil.release(null,null,ps,conn);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        if(count==0){
+            return false;
+        }else {
+            return true;
+        }
+    }
 }

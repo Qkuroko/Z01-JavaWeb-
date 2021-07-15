@@ -37,7 +37,7 @@
     <div class="row">
         <div class="col-md-4">
             <ul class="nav nav-pills nav-stacked">
-                <li class="active"><a href="#">文章列表</a></li>
+                <li class="active"><a href="/ArticleListServlet">文章列表</a></li>
                 <li><a href="/admin/articleAdd.jsp">添加文章</a></li>
                 <li><a href="/UserListServlet">用户列表</a></li>
             </ul>
