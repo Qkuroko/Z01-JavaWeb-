@@ -2,7 +2,6 @@ package cn.edu.ahtcm.servlet;
 
 import cn.edu.ahtcm.dao.UserDao;
 import cn.edu.ahtcm.dao.UserDaoImpl;
-import cn.edu.ahtcm.bean.User;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -11,8 +10,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
-@WebServlet("/LoginServlet")
-public class LoginServlet extends HttpServlet {
+@WebServlet("/RegisterServlet")
+public class RegisterServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         doGet(request,response);
     }
@@ -22,14 +21,13 @@ public class LoginServlet extends HttpServlet {
         String password = request.getParameter("password");
         System.out.println(name);
         System.out.println(password);
-        //todo 查询数据表t_user,如果没有该用户
-        UserDao dao =  new UserDaoImpl();
-        User user = dao.login(name,password);
-        if(user!=null){
-            request.getSession().setAttribute("user",user);
-            response.sendRedirect("/admin/manage.jsp");
+        UserDao dao = new UserDaoImpl();
+        boolean success = dao.register(name,password);
+        if (success){
+            response.sendRedirect("/login.jsp");
         }else{
             request.getRequestDispatcher("/error.jsp").forward(request,response);
         }
+
     }
 }

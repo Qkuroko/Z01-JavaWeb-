@@ -1,4 +1,4 @@
-package cn.edu.ahtcm.bao;
+package cn.edu.ahtcm.dao;
 
 import cn.edu.ahtcm.bean.User;
 import cn.edu.ahtcm.util.DBUtil;
@@ -39,8 +39,24 @@ public class UserDaoImpl implements UserDao {
 
     @Override
     public boolean register(String name, String password) {
-        return false;
+        String sql = "insert into t_user(name,password) values(?,?)";
+        int count = 0;
+        try {
+            PreparedStatement ps = conn.prepareStatement(sql);
+            ps.setString(1,name);
+            ps.setString(2,password);
+            count = ps.executeUpdate();
+            DBUtil.release(null,null,ps,conn);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        if(count==0){
+            return false;
+        }else{
+            return  true;
+        }
     }
+
 
     @Override
     public List<User> getUsers() {

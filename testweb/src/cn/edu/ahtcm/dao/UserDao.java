@@ -1,4 +1,4 @@
-package cn.edu.ahtcm.bao;
+package cn.edu.ahtcm.dao;
 
 import cn.edu.ahtcm.bean.User;
 
